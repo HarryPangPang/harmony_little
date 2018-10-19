@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueRouter from 'vue-router'
 // import Bmob from "hydrogen-js-sdk";
 import ElementUI from 'element-ui';
 // import Axios from 'axios' // 本地JSON
@@ -158,6 +159,7 @@ Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 
 Vue.use(ElementUI);
+Vue.use(VueRouter)
 Vue.config.productionTip = false
 // Bmob.initialize("7346cdee4d8f713bb61db6ce2d941294", "ce6345ab912505d8a988235d657d41e5");
 /* eslint-disable no-new */

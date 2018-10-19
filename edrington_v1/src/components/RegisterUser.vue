@@ -1,6 +1,7 @@
 <template>
   <div class="register_wrap">
     <!-- :gutter="10"行间隔 -->
+    <i class="el-icon-back goback_icon" @click="goback"></i>
     <img src="../assets/edrington.png" class="edrington_logo"/>
     <div class="register_wrap_2">
         <el-row :gutter="10" :span="6" >
@@ -67,6 +68,10 @@ export default {
       }).catch((err)=>{
         console.log(err)
       })
+    },
+    goback(){
+      // this.history.go(-1)
+       this.$router.go(-1)
     }
   }
 }
@@ -79,7 +84,7 @@ export default {
 }
 .edrington_logo{
   width: 50%;
-  margin: 400px 0 300px 0;
+  margin: 400px 0 300px -50px;
 }
 .register_wrap{
   width: 100%;
@@ -97,5 +102,11 @@ export default {
 }
 .register_wrap_2{
   margin: 35px;
+}
+.goback_icon{
+  color: #fff;
+  float: left;
+  margin: 50px;
+  font-size: 100px;
 }
 </style>
