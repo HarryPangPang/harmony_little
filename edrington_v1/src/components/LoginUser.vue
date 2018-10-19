@@ -18,6 +18,8 @@
     <div class="submit_reg">
        <el-button round @click="login_now">登陆</el-button>
     </div>
+    
+    <div class="reg_text" ><router-link to="/RegisterUser">马上注册</router-link></div>
     </div>
   </div>
 </template>
@@ -48,6 +50,9 @@ export default {
       }).catch((err)=>{
         console.log(err)
       })
+    },
+    register_now: ()=>{
+      this.$ro
     }
   }
 }
@@ -78,5 +83,14 @@ export default {
 }
 .register_wrap_2{
   margin: 35px;
+}
+.el-button {
+  width: 50%;
+}
+a{
+  color: #fff;
+}
+.reg_text{
+  margin: 50px 0;
 }
 </style>
