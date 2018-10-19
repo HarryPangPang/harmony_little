@@ -45,21 +45,23 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     });
 
     // 员工登陆
-    router.post("/employee_test",function(req,res){
-        res.send('OK')
-        // var query = "select * from ?? where ?? = ? and ?? = ?";
-        // var table = ["employee_login","employee_mobile", req.body.employee_mobile, "employee_password", req.body.employee_password];
-        // query = mysql.format(query,table);
+    router.post("/employee_login",function(req,res){
+        var query = "select * from ?? where ?? = ? and ?? = ?";
+        var table = ["employee_login","employee_mobile", req.body.employee_mobile, "employee_password", req.body.employee_password];
+        query = mysql.format(query,table);
         
-        // connection.query(query,function(err,rows){
-        //     if(err) {
-        //         res.send(err)
-        //         res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-        //     } else {
-        //         res.send(rows)
-        //         res.json({"Error" : false, "Message" : "Employee Registed !"});
-        //     }
-        // });
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.send(err)
+            } else {
+                if(rows==''){
+                   
+                    res.send('登陆失败')
+                }else{
+                    res.send(rows)
+                }
+            }
+        });
     });
     
     router.get("/users",function(req,res){
