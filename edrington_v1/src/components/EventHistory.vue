@@ -1,12 +1,13 @@
 <template>
   <div class="EventHistory_wrap" >
-      <div v-for="item in all_event_history" :key="item"  class="box-card">
-          <el-row :gutter="10" :span="6" >
-        
-            <el-col :xs="23" :sm="23" :md="23" :lg="12" :xl="12" class="input_wrap"> 
+      <div >
+          <el-row :gutter="10" :span="6" v-for="item in all_event_history" :key="item"  class="box-card">
+            <el-col :xs="23" :sm="23" :md="12" :lg="12" :xl="12" class="input_wrap"> 
                 <el-card >
                     <div >
                         {{'列表内容 ' + item.event_name }}
+                         {{'列表内容 ' + item.event_time }}
+                        {{'列表内容 ' + item.event_host_name }}
                     </div>
                 </el-card>
             </el-col>
