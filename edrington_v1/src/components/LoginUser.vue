@@ -40,19 +40,18 @@ export default {
     }
   },
   methods:{
-    login_now(){
+    login_now(){ 
       let employee_info = {
         employee_mobile:this.employee_info.employee_mobile,
         employee_password:this.employee_info.employee_password
       }
       axios.post('/api/employee_login',employee_info).then((res)=>{
-        console.log(res)
+        let login_info = JSON.stringify(res.data[0]);
+        window.localStorage.setItem('login_info',login_info);
+        this.$router.push('/MainHome')
       }).catch((err)=>{
         console.log(err)
       })
-    },
-    register_now: ()=>{
-      this.$ro
     }
   }
 }

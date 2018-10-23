@@ -63,7 +63,30 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
             }
         });
     });
-    
+
+    // 提交活动表单
+    router.post("/event_submit",function(req,res){
+        var query = "INSERT INTO ??(??,??,??,??,??,??,??,??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        var table = ['event_info',
+        "event_member_id","event_name","event_time","event_type",
+        "event_shengfen",'event_shengfen2','event_city','event_apply_part','event_apply_member',
+        'event_location','event_loaction_type','event_address_detail','event_listener_type',
+        'event_listenr_num','event_host_name',
+        req.body.event_member_id, req.body.event_name, req.body.event_time, req.body.event_type,
+        req.body.event_shengfen, req.body.event_shengfen2,req.body.event_city, req.body.event_apply_part, req.body.event_apply_member,
+        req.body.event_location, req.body.event_loaction_type, req.body.event_address_detail, req.body.event_listener_type,
+        req.body.event_listenr_num, req.body.event_host_name ];
+        query = mysql.format(query,table);
+      
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.send(err)
+            } else {
+                res.send({"Error" : false, "Message" : "Success", "event_info" : rows});
+            }
+        });
+    });
+
     router.get("/users",function(req,res){
         var query = "SELECT * FROM ??";
         var table = ["user_login"];
@@ -76,6 +99,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
             }
         });
     });
+
 
     router.get("/users/:user_id",function(req,res){
         var query = "SELECT * FROM ?? WHERE ??=?";
