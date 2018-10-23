@@ -57,9 +57,6 @@ export default {
     }
   },
   methods:{
-    add_member_item(){
-      console.log(this.event_member_form)
-    }
   }
 }
 </script>

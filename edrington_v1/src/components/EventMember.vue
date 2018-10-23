@@ -6,8 +6,6 @@
     <div class="add_icon"><i class="el-icon-circle-plus-outline" @click="add_member_item"></i></div>
     <div class="add_icon"><i class="el-icon-remove-outline" @click="minus_member_item"></i></div>
     <button @click="addcusmoer">提交</button>
-
-
   </div>
 </template>
 
@@ -42,7 +40,9 @@ export default {
     },
     // 提交信息
     addcusmoer(){
+      
       for(let i=0;i< this.items.length;i++){
+       this.$refs.indexa[i].event_member_form.event_member_employee_id = JSON.parse(window.localStorage.getItem('login_info')).employee_id;
        this.event_member_form_collection.push(this.$refs.indexa[i].event_member_form)
       }
       console.log(this.event_member_form_collection)

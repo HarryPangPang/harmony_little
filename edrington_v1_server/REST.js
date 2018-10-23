@@ -55,8 +55,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
                 res.send(err)
             } else {
                 if(rows==''){
-                   
-                    res.send('登陆失败')
+                    res.send('1')
                 }else{
                     res.send(rows)
                 }
@@ -87,15 +86,16 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         });
     });
 
-    router.get("/users",function(req,res){
-        var query = "SELECT * FROM ??";
-        var table = ["user_login"];
+    // 活动历史数据
+    router.get("/event_history/:event_member_id",function(req,res){
+        var query = "SELECT * FROM ?? WHERE ?? = ?";
+        var table = ["event_info",'event_member_id',req.params.event_member_id];
         query = mysql.format(query,table);
         connection.query(query,function(err,rows){
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
             } else {
-                res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+                res.send(rows)
             }
         });
     });

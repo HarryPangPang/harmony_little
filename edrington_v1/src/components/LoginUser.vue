@@ -47,8 +47,13 @@ export default {
       }
       axios.post('/api/employee_login',employee_info).then((res)=>{
         let login_info = JSON.stringify(res.data[0]);
-        window.localStorage.setItem('login_info',login_info);
-        this.$router.push('/MainHome')
+        if(res.data === 1 ){
+           window.localStorage.clear()
+          console.log('用户错误')
+        }else{
+          window.localStorage.setItem('login_info',login_info);
+          this.$router.push('/MainHome')
+        }
       }).catch((err)=>{
         console.log(err)
       })

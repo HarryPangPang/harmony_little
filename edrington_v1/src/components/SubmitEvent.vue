@@ -259,51 +259,51 @@ import axios from 'axios'
       },
 
       submitForm(event_form) {
-         this.$router.push('/EventMember')
-        // this.$refs[event_form].validate((valid) => {
-        //   if (valid) {
-        //    let event_form = {
-        //       event_member_id: '',
-        //       event_name: this.event_form.event_name,
-        //       event_time: this.event_form.event_time,
-        //       event_type:this.event_form.event_type,
-        //       event_shengfen:'',
-        //       event_shengfen2:this.shi,
-        //       event_city: this.qu, 
-        //       event_apply_part:this.event_form.event_apply_part,
-        //       event_apply_member:this.event_form.event_apply_member,
-        //       event_location:this.event_form.event_location,
-        //       event_loaction_type:this.event_form.event_loaction_type,
-        //       event_address_detail:this.event_form.event_address_detail,
-        //       event_listener_type:this.event_form.event_listener_type,
-        //       event_listenr_num:this.event_form.event_listenr_num,
-        //       event_host_name:this.event_form.event_host_name
-        //     }
+        // this.$router.push('/EventMember')
+        this.$refs[event_form].validate((valid) => {
+          if (valid) {
+           let event_form = {
+              event_member_id: '',
+              event_name: this.event_form.event_name,
+              event_time: this.event_form.event_time,
+              event_type:this.event_form.event_type,
+              event_shengfen:'',
+              event_shengfen2:this.shi,
+              event_city: this.qu, 
+              event_apply_part:this.event_form.event_apply_part,
+              event_apply_member:this.event_form.event_apply_member,
+              event_location:this.event_form.event_location,
+              event_loaction_type:this.event_form.event_loaction_type,
+              event_address_detail:this.event_form.event_address_detail,
+              event_listener_type:this.event_form.event_listener_type,
+              event_listenr_num:this.event_form.event_listenr_num,
+              event_host_name:this.event_form.event_host_name
+            }
  
-        //     event_form.event_member_id = JSON.parse(window.localStorage.getItem('login_info')).employee_id;
-        //     console.log(event_form.event_member_id)
-        //     for(let v of this.province ){
-        //       if (this.sheng == v.id){
-        //          event_form.event_shengfen = v.value
-        //       }
-        //     }  
-        //     console.log(event_form)
-        //     if(event_form.event_member_id == '' || event_form.event_member_id == null || event_form.event_member_id == undefined){
-        //       alert('内部出错')
-        //     }
-        //     else{
-        //     axios.post('/api/event_submit',event_form).then((res)=>{
-        //         this.$router.push('/EventHistory')
-        //       }).catch((err)=>{
-        //         console.log(err)
-        //       })
-        //     }
+            event_form.event_member_id = JSON.parse(window.localStorage.getItem('login_info')).employee_id;
+            console.log(event_form.event_member_id)
+            for(let v of this.province ){
+              if (this.sheng == v.id){
+                 event_form.event_shengfen = v.value
+              }
+            }  
+            console.log(event_form)
+            if(event_form.event_member_id == '' || event_form.event_member_id == null || event_form.event_member_id == undefined){
+              alert('内部出错')
+            }
+            else{
+            axios.post('/api/event_submit',event_form).then((res)=>{
+                this.$router.push('/EventHistory')
+              }).catch((err)=>{
+                console.log(err)
+              })
+            }
          
-        //   } else {
-        //     console.log('error submit!!');
-        //     return false;
-        //   }
-        // });
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       },
       resetForm(event_form) {
         this.shi='';
