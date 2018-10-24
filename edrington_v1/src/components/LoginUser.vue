@@ -49,7 +49,7 @@ export default {
         let login_info = JSON.stringify(res.data[0]);
         if(res.data === 1 ){
            window.localStorage.clear()
-          console.log('用户错误')
+          alert('用户错误')
         }else{
           window.localStorage.setItem('login_info',login_info);
           this.$router.push('/MainHome')

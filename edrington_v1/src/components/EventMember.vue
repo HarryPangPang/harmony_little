@@ -40,11 +40,18 @@ export default {
     },
     // 提交信息
     addcusmoer(){
-      
+      this.event_member_form_collection = [];
       for(let i=0;i< this.items.length;i++){
        this.$refs.indexa[i].event_member_form.event_member_employee_id = JSON.parse(window.localStorage.getItem('login_info')).employee_id;
+       this.$refs.indexa[i].event_member_form.event_member_event_num =  this.$route.query.event_num
        this.event_member_form_collection.push(this.$refs.indexa[i].event_member_form)
       }
+
+      // axios.post('/api/employee_regist',this.event_member_form_collection).then((res)=>{
+      //           console.log(res)
+      //         }).catch((err)=>{
+      //           console.log(err)
+      //  })
       console.log(this.event_member_form_collection)
     }
   }

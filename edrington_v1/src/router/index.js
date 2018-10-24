@@ -6,6 +6,7 @@ import SubmitEvent from '@/components/SubmitEvent'
 import MainHome from '@/components/MainHome'
 import EventHistory from '@/components/EventHistory'
 import EventMember from '@/components/EventMember'
+import EventHistoryDetail from '@/components/EventHistoryDetail'
 
 
 Vue.use(Router)
@@ -40,6 +41,11 @@ export default new Router({
       path: '/EventMember',
       name: 'EventMember',
       component: EventMember  
+    },
+    {
+      path: '/EventHistoryDetail',
+      name: 'EventHistoryDetail',
+      component: EventHistoryDetail  
     }
   ]
 })
