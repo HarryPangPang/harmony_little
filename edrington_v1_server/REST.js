@@ -109,24 +109,11 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
             if(err) {
                 res.send(err)
             } else {
-                res.send(rows)
+                res.send('0')
             }
         });
     });
 
-
-    router.get("/users/:user_id",function(req,res){
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["user_login","user_id",req.params.user_id];
-        query = mysql.format(query,table);
-        connection.query(query,function(err,rows){
-            if(err) {
-                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-            } else {
-                res.json({"Error" : false, "Message" : "Success", "Users" : rows});
-            }
-        });
-    });
     router.put("/users",function(req,res){
         var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
         var table = ["user_login","user_password",md5(req.body.password),"user_email",req.body.email];
@@ -139,6 +126,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
             }
         });
     });
+    
     router.delete("/users/:email",function(req,res){
         var query = "DELETE from ?? WHERE ??=?";
         var table = ["user_login","user_email",req.params.email];

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import memberitem from './memberitem.vue'
+import memberitem from '../public/memberitem.vue'
 import axios from 'axios';
 export default {
   name: 'EventMember',
@@ -43,6 +43,7 @@ export default {
     },
     // 提交信息
     addcusmoer(){
+      this.$router.push('/MainHome')
       this.event_member_form_collection = [];
       for(let i=0;i< this.items.length;i++){
        this.$refs.indexa[i].event_member_form.event_member_employee_id = JSON.parse(window.localStorage.getItem('login_info')).employee_id;
@@ -59,10 +60,11 @@ export default {
           cuu2.push(cuur)
         }
         axios.post('/api/add_event_member',cuu2).then((res)=>{
-                console.log(res)
-              }).catch((err)=>{
-                console.log(err)
-                alert('错误！')
+              console.log(res)
+              this.$router.push('/MainHome')
+          }).catch((err)=>{
+              console.log(err)
+           alert('错误！')
        })
     }
   }

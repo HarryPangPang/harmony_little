@@ -1,7 +1,7 @@
 <template>
   <div class="register_wrap">
     <!-- :gutter="10"行间隔 -->
-    <i class="el-icon-back goback_icon" @click="goback"></i>
+    <headerback/>
     <img src="../assets/edrington.png" class="edrington_logo"/>
     <div class="register_wrap_2">
       <el-form :model="employee_info" :rules="rules" ref="employee_info">
@@ -46,9 +46,13 @@
 <script>
 // import {ajaxGet,ajaxPost} from '../public/http.js'
 import axios from 'axios';
+import headerback from '../public/header.vue'
 export default {
   name: 'RegisterUser',
   created() {
+  },
+  components:{
+    headerback
   },
   data () {
     var checkPhone = (rule, value, callback) => {
@@ -107,7 +111,9 @@ export default {
                 employee_email:'',
                 employee_password:''
               }
+              alert('注册成功')
               }).catch((err)=>{
+                alert('注册失败')
                 console.log(err)
               })
           } else {
@@ -115,10 +121,6 @@ export default {
             return false;
           }
         });
-    },
-    goback(){
-      // this.history.go(-1)
-       this.$router.go(-1)
     }
   }
 }
@@ -126,12 +128,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.message_wrap{
+  width: 50%;
+}
+.el-message{
+  width: 50%;
+}
 .input_wrap{
   margin: 20px 0;
 }
 .edrington_logo{
   width: 50%;
-  margin: 400px 0 300px -50px;
+  margin: 300px 0 250px -50px;
 }
 .register_wrap{
   width: 100%;
@@ -149,11 +157,5 @@ export default {
 }
 .register_wrap_2{
   margin: 35px;
-}
-.goback_icon{
-  color: #fff;
-  float: left;
-  margin: 50px;
-  font-size: 100px;
 }
 </style>
