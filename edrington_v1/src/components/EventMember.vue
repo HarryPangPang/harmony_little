@@ -3,9 +3,13 @@
     <div :is="item.component" :event_member_form = item.event_member_form v-for="item in items" ref="indexa">
       <memberitem :ref="item.index"></memberitem>
     </div>
+    <div class="member_item">
     <div class="add_icon"><i class="el-icon-circle-plus-outline" @click="add_member_item"></i></div>
     <div class="add_icon"><i class="el-icon-remove-outline" @click="minus_member_item"></i></div>
-    <button @click="addcusmoer">提交</button>
+    </div>
+     <div class="submit_ico">
+       <el-button @click="addcusmoer">提交</el-button>
+     </div>
   </div>
 </template>
 
@@ -18,7 +22,6 @@ export default {
     memberitem
   },
   mounted() {
-    // this.addcusmoer();
   },
   data(){
     return{
@@ -47,12 +50,20 @@ export default {
        this.event_member_form_collection.push(this.$refs.indexa[i].event_member_form)
       }
 
-      // axios.post('/api/employee_regist',this.event_member_form_collection).then((res)=>{
-      //           console.log(res)
-      //         }).catch((err)=>{
-      //           console.log(err)
-      //  })
-      console.log(this.event_member_form_collection)
+      let cuu2 = []
+      for (let m in this.event_member_form_collection){
+          let cuur = []
+          for (let n in this.event_member_form_collection[m]){
+              cuur.push(this.event_member_form_collection[m][n])
+          }
+          cuu2.push(cuur)
+        }
+        axios.post('/api/add_event_member',cuu2).then((res)=>{
+                console.log(res)
+              }).catch((err)=>{
+                console.log(err)
+                alert('错误！')
+       })
     }
   }
 }
@@ -71,5 +82,18 @@ export default {
     text-align: center;
     width: 100%;
     margin-bottom: 100px;
+  }
+  .submit_ico{
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .member_item{
+    display: flex;
+    justify-content: space-between;
+    margin: 50px;
+    /* color: aqua */
+  }
+  .el-button{
+    width: 50%;
   }
 </style>

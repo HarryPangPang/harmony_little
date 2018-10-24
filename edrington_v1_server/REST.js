@@ -103,23 +103,13 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     });
 
     // 提交活动客户
-    router.post("/event_member",function(req,res){
-        // var query = "INSERT INTO ??(??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?)";
-        // var table = ["event_member","event_member_employee_id","event_member_event_num","event_member_name","event_member_sex",
-        // 'event_member_contact_type','event_member_contact_info','event_member_contact_type2','event_member_contact_info2',
-        // req.body.employee_name, req.body.employee_mobile, req.body.employee_email, req.body.employee_password];
-        // query = mysql.format(query,table);
-        // var query = "INSERT INTO event_member()"
-        var event_member_collection = [
-            
-        ]
-        var query = "INSERT INTO event_member('event_member_employee_id','event_member_event_num','event_member_name','event_member_sex','event_member_contact_type','event_member_contact_info,'event_member_contact_type2','event_member_contact_info2') VALUES ?";
-        // var sql = "INSERT INTO url(`from`,`to`,`status`, `is_new`) VALUES ?";
-        connection.query(query,[event_member_collection],function(err,rows){
+    router.post("/add_event_member",function(req,res){
+        var query = "INSERT INTO event_member(event_member_employee_id,event_member_event_num,event_member_name,event_member_sex,event_member_contact_type,event_member_contact_info,event_member_contact_type2,event_member_contact_info2) VALUES ? ";
+        connection.query(query,[req.body],function(err,rows){
             if(err) {
                 res.send(err)
             } else {
-                console.log(rows)
+                res.send(rows)
             }
         });
     });
