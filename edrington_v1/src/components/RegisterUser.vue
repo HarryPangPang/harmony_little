@@ -94,7 +94,7 @@ export default {
     }
   },
   methods:{
-    regist_now(employee_info){
+    regist_now(employee_info){    
         this.$refs[employee_info].validate((valid) => {
           if (valid) {
               let employee_info = {
@@ -112,6 +112,7 @@ export default {
                 employee_password:''
               }
               alert('注册成功')
+              this.$router.push('/')
               }).catch((err)=>{
                 alert('注册失败')
                 console.log(err)

@@ -1,12 +1,13 @@
 <template>
   <div>
+    <i class="el-icon-back goback_icon" @click="goback"></i>
     <el-form :model="event_form" :rules="rules" ref="event_form" label-width="100px">
       <el-form-item label="活动名称" prop="event_name">
         <el-input v-model="event_form.event_name"></el-input>
       </el-form-item>
 
       <el-form-item label="活动时间" prop="event_time">
-        <el-col :span="11">
+        <el-col >
          <el-date-picker  v-model="event_form.event_time" type="date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd"  placeholder="选择日期"> </el-date-picker>
         </el-col>
       </el-form-item>
@@ -71,12 +72,12 @@
       </el-form-item>
       <el-form-item label="场地类型" prop="event_loaction_type">
         <el-select v-model="event_form.event_loaction_type" placeholder="请选择场地类型">
-          <el-option label="Training" value="Training"></el-option>
-          <el-option label="Sales" value="Sales"></el-option>
-          <el-option label="DTC" value="DTC"></el-option>
-          <el-option label="MKT" value="MKT"></el-option>
-          <el-option label="ATR" value="ATR"></el-option>
-          <el-option label="BackOffice" value="BackOffice"></el-option>
+          <el-option label="Bar/Lounge/Club" value="Bar/Lounge/Club"></el-option>
+          <el-option label="Boutique" value="Boutique"></el-option>
+          <el-option label="Office" value="Office"></el-option>
+          <el-option label="Chinese Restaurant" value="Chinese Restaurant"></el-option>
+          <el-option label="Western Restaurant" value="Western Restaurant"></el-option>
+          <el-option label="Others" value="Others"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="详细地址" prop="event_address_detail">
@@ -109,13 +110,9 @@
 
 <script>
 import axios from 'axios'
-// import EventMember from './EventMember.vue'
   export default {
-    // name: 'SubmitEvent',
-    components:{
-      // EventMember
-    },
-    
+    name: 'SubmitEvent',
+
     created() {
       this.getCityData()
     },
@@ -188,6 +185,9 @@ import axios from 'axios'
       };
     },
     methods: {
+       goback(){
+       this.$router.go(-1)
+    },
           // 加载china地点数据，三级
       getCityData:function(){
         var that = this
@@ -279,26 +279,25 @@ import axios from 'axios'
               event_listenr_num:this.event_form.event_listenr_num,
               event_host_name:this.event_form.event_host_name
             }
- 
             event_form.event_member_id = JSON.parse(window.localStorage.getItem('login_info')).employee_id;
-            console.log(event_form.event_member_id)
-            for(let v of this.province ){
-              if (this.sheng == v.id){
-                 event_form.event_shengfen = v.value
-              }
-            }  
-            console.log(event_form)
-            if(event_form.event_member_id == '' || event_form.event_member_id == null || event_form.event_member_id == undefined){
-              alert('内部出错')
+            if(event_form.event_member_id === null || event_form.event_member_id === undefined || event_form.event_member_id ===''){
+              alert('请重新登陆')
+              this.$router.push('/')
+            } else{
+                for(let v of this.province ){
+                  if (this.sheng == v.id){
+                    event_form.event_shengfen = v.value
+                  }
+                }  
+                console.log(event_form)
+                axios.post('/api/event_submit',event_form).then((res)=>{
+                  alert('提交成功')
+                    this.$router.push('/EventHistory')
+                  }).catch((err)=>{
+                    alert('提交失败')
+                    console.log(err)
+                })
             }
-            else{
-            axios.post('/api/event_submit',event_form).then((res)=>{
-                this.$router.push('/EventHistory')
-              }).catch((err)=>{
-                console.log(err)
-              })
-            }
-         
           } else {
             console.log('error submit!!');
             return false;
@@ -322,12 +321,18 @@ import axios from 'axios'
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.goback_icon{
+  color: #003366;
+  float: left;
+  margin: 50px;
+  font-size: 100px;
+}
 .submit_icon{
   width: 100%;
   text-align: center;
 }
   .el-form{
-    margin:100px 100px 60px 0;
+    padding:200px 100px 60px 0;
   }
   .el-select{
     width: 100%;
@@ -340,5 +345,8 @@ margin: 0 !important;
     text-align: center;
     width: 100%;
     margin-bottom: 100px;
+  }
+  .el-date-editor.el-input, .el-date-editor.el-input__inner{
+    width: 100%;
   }
 </style>

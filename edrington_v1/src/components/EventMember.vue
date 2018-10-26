@@ -1,5 +1,8 @@
 <template>
   <div class="register_wrap" >
+    <div @click="goback" class="el-icon-back1">
+         <i class="el-icon-back goback_icon" ></i>
+      </div>
     <div :is="item.component" :event_member_form = item.event_member_form v-for="item in items" ref="indexa">
       <memberitem :ref="item.index"></memberitem>
     </div>
@@ -31,6 +34,9 @@ export default {
     }
   },
   methods:{
+    goback(){
+       this.$router.go(-1)
+    },
     add_member_item(){
       this.items.push({
         'component': memberitem,
@@ -43,7 +49,6 @@ export default {
     },
     // 提交信息
     addcusmoer(){
-      this.$router.push('/MainHome')
       this.event_member_form_collection = [];
       for(let i=0;i< this.items.length;i++){
        this.$refs.indexa[i].event_member_form.event_member_employee_id = JSON.parse(window.localStorage.getItem('login_info')).employee_id;
@@ -73,6 +78,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.goback_icon{
+  color: #003366;
+  float: left;
+  margin: 50px;
+  font-size: 100px;
+}
+.el-icon-back1{
+    height: 150px;
+}
   .el-form{
     margin:100px 100px 60px 0;
   }

@@ -28,7 +28,7 @@
 // import {ajaxGet,ajaxPost} from '../public/http.js'
 import axios from 'axios';
 export default {
-  name: 'RegisterUser',
+  name: 'LoginUser',
   created() {
   },
   data () {
@@ -49,12 +49,15 @@ export default {
         let login_info = JSON.stringify(res.data[0]);
         if(res.data === 1 ){
            window.localStorage.clear()
-          alert('用户错误')
-        }else{
+          alert('用户不存在或密码错误')
+        }
+        else
+        {
           window.localStorage.setItem('login_info',login_info);
           this.$router.push('/MainHome')
         }
       }).catch((err)=>{
+        alert('登陆错误')
         console.log(err)
       })
     }

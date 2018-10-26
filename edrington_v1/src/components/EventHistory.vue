@@ -1,5 +1,8 @@
 <template>
   <div class="EventHistory_wrap" >
+      <div @click="goback" class="el-icon-back1">
+         <i class="el-icon-back goback_icon" ></i>
+      </div>
       <div class="history_card_wrap">
           <el-row :gutter="10" :span="6" >
             <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" v-for="item in all_event_history" :key="item.event_num"> 
@@ -22,7 +25,7 @@
 </template>
 
 <script>
-// import {ajaxGet,ajaxPost} from '../public/http.js'
+
 import axios from 'axios';
 export default {
   name: 'EventHistory',
@@ -50,6 +53,9 @@ export default {
     },
     add_this_event_customer(item){
         this.$router.push({path: '/EventMember', query: item})
+    },
+     goback(){
+       this.$router.go(-1)
     }
   }
 }
@@ -73,5 +79,14 @@ export default {
 .conten_list_wrap{
     margin-bottom: 30px;
     border-bottom: 2px dashed #E4E7ED
+}
+.goback_icon{
+  color: #003366;
+  float: left;
+  margin: 50px;
+  font-size: 100px;
+}
+.el-icon-back1{
+    height: 150px;
 }
 </style>
