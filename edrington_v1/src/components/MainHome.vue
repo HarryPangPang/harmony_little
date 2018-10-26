@@ -26,7 +26,6 @@ export default {
   },
   methods:{
      goback(){
-      //  this.$router.go(-1)
       this.$router.push('/')
     },
     goSubmitEvent(){
@@ -52,6 +51,7 @@ export default {
 }
 .el-icon-back1{
     height: 150px;
+    display: block;
 }
   .el-row{
     /* display: table-cell; */
@@ -69,5 +69,6 @@ export default {
     display: table;
     width: 100%;
     background-color: #003366;
+    overflow: hidden;
     }
 </style>
