@@ -23,22 +23,25 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
       
         connection.query(query_exist,function(err,rows){
             if(err) {
-                res.send(err)
+                connection.release();
+                res.send(err);
             } else {
-                    console.log(req.body)
+                    // console.log(req.body)
                    if(rows == ''){
-                    // res.send('注册成功')
                     connection.query(query,function(err,rows){
                         if(err) {
-                            res.send(err)
+                            res.send(err);
+                            connection.release();
                             // res.json({"Error" : true, "Message" : "Error executing MySQL query"});
                         } else {
                             res.json({"Error" : false, "Message" : "注册成功 !"});
+                            connection.release();
                         }
                     });
                    }
                    else{
-                       res.send('已经注册过')
+                       res.send('已经注册过');
+                       connection.release();
                    }
  
             }
@@ -53,12 +56,15 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         
         connection.query(query,function(err,rows){
             if(err) {
+                connection.release();
                 res.send(err)
             } else {
                 if(rows==''){
+                    connection.release();
                     res.send('1')
                 }else{
                     res.send(rows)
+                    connection.release();
                 }
             }
         });
@@ -80,10 +86,12 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
       
         connection.query(query,function(err,rows){
             if(err) {
-                res.send(err)
+                res.send(err);
+                connection.release();
             } else {
                 // res.send(rows)
                 res.send({"Error" : false, "Message" : "Success", "event_info" : rows});
+                connection.release();
             }
         });
     });
@@ -96,8 +104,10 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         connection.query(query,function(err,rows){
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+                connection.release();
             } else {
-                res.send(rows)
+                res.send(rows);
+                connection.release();
             }
         });
     });
@@ -107,9 +117,11 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         var query = "INSERT INTO event_member(event_member_employee_id,event_member_event_num,event_member_name,event_member_sex,event_member_contact_type,event_member_contact_info,event_member_contact_type2,event_member_contact_info2) VALUES ? ";
         connection.query(query,[req.body],function(err,rows){
             if(err) {
-                res.send(err)
+                res.send(err);
+                connection.release();
             } else {
-                res.send('0')
+                res.send('0');
+                connection.release();
             }
         });
     });
@@ -121,8 +133,10 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         connection.query(query,function(err,rows){
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+                connection.release();
             } else {
                 res.json({"Error" : false, "Message" : "Updated the password for email "+req.body.email});
+                connection.release();
             }
         });
     });
@@ -134,8 +148,10 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         connection.query(query,function(err,rows){
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+                connection.release();
             } else {
                 res.json({"Error" : false, "Message" : "Deleted the user with email "+req.params.email});
+                connection.release();
             }
         });
     });

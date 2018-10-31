@@ -14,7 +14,7 @@ function REST(){
 
 REST.prototype.connectMysql = function() {
     var self = this;
-    var pool      =    mysql.createPool({
+    var pool = mysql.createPool({
         connectionLimit : 100,
         host     : 'localhost',
         user     : 'root',
@@ -24,10 +24,13 @@ REST.prototype.connectMysql = function() {
     });
     pool.getConnection(function(err,connection){
         if(err) {
+          console.log('建立连接失败')  
           self.stop(err);
         } else {
+            console.log('建立连接成功')
           self.configureExpress(connection);
         }
+        // pool.end();
     });
 }
 
