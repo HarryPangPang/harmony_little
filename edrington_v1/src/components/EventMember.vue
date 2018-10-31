@@ -65,8 +65,8 @@ export default {
           cuu2.push(cuur)
         }
         axios.post('/api/add_event_member',cuu2).then((res)=>{
-              console.log(res)
-              this.$router.push('/MainHome')
+              // console.log(res)
+              this.$router.push('/EventHistory')
           }).catch((err)=>{
               console.log(err)
            alert('错误！')
